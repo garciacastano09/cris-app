@@ -19,18 +19,22 @@ public class CreateResearcherServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		String name = req.getParameter("name");
-		String affiliation = req.getParameter("affiliation");
-		String email = req.getParameter("email");
-		String password = req.getParameter("pwd");
-		
-		ResearcherDAO dao = ResearcherDAOImpl.getInstance();
-		Researcher r = new Researcher(id, name, email, affiliation);
-		r.setPassword(password);
+		try {		
+			ResearcherDAO dao = ResearcherDAOImpl.getInstance();
+		Researcher r = new Researcher(
+				req.getParameter("id"), 
+				req.getParameter("name"), 
+				req.getParameter("email"), 
+				req.getParameter("affiliation")
+		);
+		r.setPassword(req.getParameter("pwd"));
 		dao.update(r);
 		
 		resp.sendRedirect("/APSV/RootView.jsp");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 

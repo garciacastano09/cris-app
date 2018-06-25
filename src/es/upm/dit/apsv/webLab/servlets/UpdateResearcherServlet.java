@@ -19,18 +19,26 @@ public class UpdateResearcherServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		String name = req.getParameter("name");
-		String affiliation = req.getParameter("affiliation");
-		String email = req.getParameter("email");
-		String password = req.getParameter("pwd");
+		try {
+			ResearcherDAO resDAO = ResearcherDAOImpl.getInstance();
+			String id = req.getParameter("id");
+			String password = req.getParameter("pwd");
+			
+			Researcher r = new Researcher(
+					id, 
+					req.getParameter("name"), 
+					req.getParameter("email"), 
+					req.getParameter("affiliation")
+			);
+			r.setPassword(password);
+			resDAO.update(r);
+			resp.sendRedirect("ViewResearcherServlet?rsi="+id);
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 		
-		ResearcherDAO dao = ResearcherDAOImpl.getInstance();
-		Researcher r = new Researcher(id, name, email, affiliation);
-		r.setPassword(password);
-		dao.update(r);
 		
-		resp.sendRedirect("ViewResearcherServlet?rsi="+id);
 	}
 	
 

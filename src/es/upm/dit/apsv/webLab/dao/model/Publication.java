@@ -60,6 +60,10 @@ public class Publication implements Serializable {
 	public Collection<Researcher> getAuthors() {
 		return authors;
 	}
+	
+	public void addAuthors(Researcher r) {
+		this.authors.add(r);
+	}
 
 	public void setAuthors(Collection<Researcher> authors) {
 		this.authors = authors;

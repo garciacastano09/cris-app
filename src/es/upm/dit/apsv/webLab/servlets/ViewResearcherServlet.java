@@ -19,10 +19,15 @@ public class ViewResearcherServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String rsi = req.getParameter("rsi");
-		ResearcherDAO dao = ResearcherDAOImpl.getInstance();
-		req.getSession().setAttribute("researcher", dao.read(rsi));
-		resp.sendRedirect("/APSV/ViewResearcher.jsp");
+		try {
+			String rsi = req.getParameter("rsi");
+			ResearcherDAO dao = ResearcherDAOImpl.getInstance();
+			req.getSession().setAttribute("researcher", dao.read(rsi));
+			resp.sendRedirect("/APSV/ViewResearcher.jsp");
+
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }

@@ -19,6 +19,7 @@ public class ListResearchersServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
 		ResearcherDAO dao = ResearcherDAOImpl.getInstance();
 		req.getSession().setAttribute("rs", dao.readAll());
 		resp.sendRedirect("/APSV/ListResearchers.jsp");

@@ -13,7 +13,6 @@ import es.upm.dit.apsv.webLab.dao.PublicationDAOImpl;
 import es.upm.dit.apsv.webLab.dao.ResearcherDAO;
 import es.upm.dit.apsv.webLab.dao.ResearcherDAOImpl;
 import es.upm.dit.apsv.webLab.dao.model.Publication;
-import es.upm.dit.apsv.webLab.dao.model.Researcher;
 
 @WebServlet("/CreatePublicationServlet")
 public class CreatePublicationServlet extends HttpServlet {
@@ -22,20 +21,26 @@ public class CreatePublicationServlet extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
-		String title = req.getParameter("title");
-		int citeCount = Integer.parseInt(req.getParameter("citecount"));
-		String authId = req.getParameter("authId");
-		
-		ResearcherDAO daor = ResearcherDAOImpl.getInstance();
-		Researcher r = daor.read(authId);
-		
-		PublicationDAO daop = PublicationDAOImpl.getInstance();
-		Publication p = new Publication(id, title, citeCount);
-		p.getAuthors().add(r);
-		
-		daop.update(p);
-				
-		resp.sendRedirect("ViewResearcherServlet?rsi="+authId);
+		try {
+			PublicationDAO pubDAO = PublicationDAOImpl.getInstance();
+			ResearcherDAO resDAO = ResearcherDAOImpl.getInstance();
+
+			String authId = req.getParameter("authId");
+			
+			Publication p = new Publication(
+					req.getParameter("id"), 
+					req.getParameter("title"), 
+					Integer.parseInt(req.getParameter("citecount"))
+			);
+			
+			p.getAuthors().add(resDAO.read(authId));
+			pubDAO.update(p);
+					
+			resp.sendRedirect("ViewResearcherServlet?rsi="+authId);
+
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+
 	}
 }
