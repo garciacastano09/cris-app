@@ -23,7 +23,7 @@ public class ViewResearcherServlet extends HttpServlet {
 			String rsi = req.getParameter("rsi");
 			ResearcherDAO dao = ResearcherDAOImplOfy.getInstance();
 			req.getSession().setAttribute("researcher", dao.read(rsi));
-			resp.sendRedirect("/APSV/ViewResearcher.jsp");
+			resp.sendRedirect("ViewResearcher.jsp");
 
 		} catch(Exception e) {
 			e.printStackTrace();

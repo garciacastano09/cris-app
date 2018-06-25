@@ -30,7 +30,7 @@ public class CreateResearcherServlet extends HttpServlet {
 			r.setPassword(req.getParameter("pwd"));
 			resDAO.update(r);
 			
-			resp.sendRedirect("/APSV/RootView.jsp");
+			resp.sendRedirect("RootView.jsp");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

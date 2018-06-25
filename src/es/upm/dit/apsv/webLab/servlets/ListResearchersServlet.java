@@ -22,7 +22,7 @@ public class ListResearchersServlet extends HttpServlet {
 		
 		ResearcherDAO resDAO = ResearcherDAOImplOfy.getInstance();
 		req.getSession().setAttribute("rs", resDAO.readAll());
-		resp.sendRedirect("/APSV/ListResearchers.jsp");
+		resp.sendRedirect("ListResearchers.jsp");
 	}
 
 }
