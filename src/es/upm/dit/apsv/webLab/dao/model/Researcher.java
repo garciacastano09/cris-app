@@ -3,11 +3,10 @@ package es.upm.dit.apsv.webLab.dao.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+
+import com.googlecode.objectify.annotation.Entity;
+import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
 
 @Entity
 public class Researcher implements Serializable {
@@ -17,11 +16,10 @@ public class Researcher implements Serializable {
 	@Id
 	private String id;
 	private String name;
+	@Index
 	private String email;
 	private String affiliation;
 	private String password;
-	
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy="authors", cascade= {CascadeType.MERGE, CascadeType.PERSIST})
 	private Collection<Publication> publications;
 	
 	public Researcher() {

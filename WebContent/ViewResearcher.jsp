@@ -13,6 +13,14 @@
 <c:if test="${null != user}">
 	<a href="LogoutServlet" class="btn btn-danger">Log out</a>
 </c:if>
+
+<c:if test="${user.name == 'root'}">
+<form method="GET" action="/SendResearcherEmailServlet">
+		<input type="hidden" name="rid" value=<c:out value="${r.id}" />>
+		<input type="submit" value="Send email">
+</form>
+</c:if>
+
 <h1>Researcher profile</h1>
 
 	<h3>Id:</h3>

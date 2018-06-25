@@ -3,6 +3,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreServiceFactory" %>
+<%@ page import="com.google.appengine.api.blobstore.BlobstoreService" %>
+<% BlobstoreService blobstoreService =
+   BlobstoreServiceFactory.getBlobstoreService(); %>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -29,5 +33,12 @@
 		<input type="password" class="form-control" name="pwd" placeholder="Password">
 		<button type="submit" class="btn btn-success">Create or update researcher</button>
 	</form>
+<h2>Upload Researchers:</h2>
+<form action="<%=blobstoreService.createUploadUrl("/UploadCreateResearchersServlet")%>"
+		method="post" enctype="multipart/form-data">
+		<input type="file" name="file" />
+               <input type="submit" value="Upload researchers" />
+</form>
+
 </body>
 </html>

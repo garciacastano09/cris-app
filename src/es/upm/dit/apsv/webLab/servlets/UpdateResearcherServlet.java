@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.apsv.webLab.dao.ResearcherDAO;
-import es.upm.dit.apsv.webLab.dao.ResearcherDAOImpl;
+import es.upm.dit.apsv.webLab.dao.ResearcherDAOImplOfy;
 import es.upm.dit.apsv.webLab.dao.model.Researcher;
 
 @WebServlet("/UpdateResearcherServlet")
@@ -20,7 +20,7 @@ public class UpdateResearcherServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
-			ResearcherDAO resDAO = ResearcherDAOImpl.getInstance();
+			ResearcherDAO resDAO = ResearcherDAOImplOfy.getInstance();
 			String id = req.getParameter("id");
 			String password = req.getParameter("pwd");
 			

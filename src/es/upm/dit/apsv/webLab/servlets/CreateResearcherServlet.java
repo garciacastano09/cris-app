@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.apsv.webLab.dao.ResearcherDAO;
-import es.upm.dit.apsv.webLab.dao.ResearcherDAOImpl;
+import es.upm.dit.apsv.webLab.dao.ResearcherDAOImplOfy;
 import es.upm.dit.apsv.webLab.dao.model.Researcher;
 
 @WebServlet("/CreateResearcherServlet")
@@ -20,17 +20,17 @@ public class CreateResearcherServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {		
-			ResearcherDAO dao = ResearcherDAOImpl.getInstance();
-		Researcher r = new Researcher(
-				req.getParameter("id"), 
-				req.getParameter("name"), 
-				req.getParameter("email"), 
-				req.getParameter("affiliation")
-		);
-		r.setPassword(req.getParameter("pwd"));
-		dao.update(r);
-		
-		resp.sendRedirect("/APSV/RootView.jsp");
+			ResearcherDAO resDAO = ResearcherDAOImplOfy.getInstance();
+			Researcher r = new Researcher(
+					req.getParameter("id"), 
+					req.getParameter("name"), 
+					req.getParameter("email"), 
+					req.getParameter("affiliation")
+			);
+			r.setPassword(req.getParameter("pwd"));
+			resDAO.update(r);
+			
+			resp.sendRedirect("/APSV/RootView.jsp");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

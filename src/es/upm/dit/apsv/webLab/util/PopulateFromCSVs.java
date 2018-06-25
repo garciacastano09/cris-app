@@ -51,7 +51,7 @@ public class PopulateFromCSVs {
 			Publication p = new Publication(s[0], 
 					s[1].length()>250?s[1].substring(0, 250):s[1],
 					Integer.valueOf(s[2]));
-			p.getAuthors().addAll(Arrays.stream(s[3].split(",")).filter(r->researchers.containsKey(r)).map(r->researchers.get(r)).collect(Collectors.toList()));
+			//p.getAuthors().addAll(Arrays.stream(s[3].split(",")).filter(r->researchers.containsKey(r)).map(r->researchers.get(r)).collect(Collectors.toList()));
 					return p;
 		}
 				)

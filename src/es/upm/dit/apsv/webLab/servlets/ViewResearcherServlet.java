@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import es.upm.dit.apsv.webLab.dao.ResearcherDAO;
-import es.upm.dit.apsv.webLab.dao.ResearcherDAOImpl;
+import es.upm.dit.apsv.webLab.dao.ResearcherDAOImplOfy;
 
 @WebServlet("/ViewResearcherServlet")
 public class ViewResearcherServlet extends HttpServlet {
@@ -21,7 +21,7 @@ public class ViewResearcherServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		try {
 			String rsi = req.getParameter("rsi");
-			ResearcherDAO dao = ResearcherDAOImpl.getInstance();
+			ResearcherDAO dao = ResearcherDAOImplOfy.getInstance();
 			req.getSession().setAttribute("researcher", dao.read(rsi));
 			resp.sendRedirect("/APSV/ViewResearcher.jsp");
 
